@@ -30,4 +30,32 @@ public class ImageProcessingCLI {
         return grayImage;
     }
 
+    public static BufferedImage convertToSepia(BufferedImage image) {
+        int width = image.getWidth();
+        int height =   image.getHeight();
+        BufferedImage sepiaImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int rgb = image.getRGB(x, y);
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+
+                int newR = (int) (0.393 * r + 0.769 * g + 0.189 * b);
+                int newG = (int) (0.349 * r + 0.686 * g + 0.168 * b);
+                int newB = (int) (0.272 * r + 0.534 * g + 0.131 * b);
+
+                newR = Math.min(newR, 255);
+                newG = Math.min(newG, 255);
+                newB = Math.min(newB, 255);
+
+                int newRGB = (newR << 16) | (newG << 8) | newB;
+                sepiaImage.setRGB(x, y, newRGB);
+
+            }
+        }
+        return sepiaImage;
+    }
+
 }
