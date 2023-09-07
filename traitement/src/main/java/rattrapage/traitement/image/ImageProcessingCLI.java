@@ -52,7 +52,7 @@ public class ImageProcessingCLI {
                 transformedImage = convertToSepia(sourceImage);
             }
 
-            ImageIO.write(transformedImage, "jpg", outputFile);
+            ImageIO.write(transformedImage, "jpeg", outputFile);
             System.out.println("Transformation terminée. Image enregistrée sous : " + outputPath);
         } catch (IOException e) {
             System.err.println("Erreur lors du traitement de l'image : " + e.getMessage());
